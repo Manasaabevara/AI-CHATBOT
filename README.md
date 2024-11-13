@@ -16,13 +16,17 @@ An AI-powered chatbot that answers questions based on the content of uploaded PD
 1.Clone the Repository
 
 bash
+
 git clone https://github.com/your-username/your-repository-name.git
+
 cd your-repository-name
 
 2.Install Dependencies
 
 Install required packages using:
+
 bash
+
 pip install -r requirements.txt
 
 3.Set Up Environment Variables
@@ -30,6 +34,7 @@ pip install -r requirements.txt
 Create a .env file in the project root and add your Google API Key:
 
 makefile
+
 GOOGLE_API_KEY=your_google_api_key_here
 
 # Usage
