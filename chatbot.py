@@ -89,7 +89,7 @@ def user_input(user_question):
 st.set_page_config(page_title="Document Genie", layout="wide")
 
 def main():
-    st.header("AI Clone Chatbot 💁")
+    st.header("AI Chatbot")
     
     # Upload PDFs
     pdf_docs = st.file_uploader("Upload your PDF files for processing", accept_multiple_files=True)
