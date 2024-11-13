@@ -18,13 +18,17 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 if not GOOGLE_API_KEY:
     raise ValueError("Google API key is missing. Please provide it in the .env file.")
 
-# Function to extract text from uploaded PDFs
-def get_pdf_text(pdf_docs):
+# Function to retrieve hardcoded text from PDF files
+def get_document_text():
+    doc1_path = "C:/Users/chall/OneDrive/Desktop/Assignment/google.pdf"
+    doc2_path = "C:/Users/chall/OneDrive/Desktop/Assignment/uber.pdf"
+    doc3_path = "C:/Users/chall/OneDrive/Desktop/Assignment/tesla.pdf"
+    
     text = ""
-    for pdf in pdf_docs:
-        pdf_reader = PdfReader(pdf)
+    for doc_path in [doc1_path, doc2_path, doc3_path]:
+        pdf_reader = PdfReader(doc_path)
         for page in pdf_reader.pages:
-            text += page.extract_text()
+            text += page.extract_text() + "\n"
     return text
 
 # Function to split text into manageable chunks
@@ -91,19 +95,14 @@ st.set_page_config(page_title="Document Genie", layout="wide")
 def main():
     st.header("AI Chatbot")
     
-    # Upload PDFs
-    pdf_docs = st.file_uploader("Upload your PDF files for processing", accept_multiple_files=True)
-    
-    if st.button("Submit & Process"):
-        if pdf_docs:
-            with st.spinner("Processing..."):
-                raw_text = get_pdf_text(pdf_docs)
-                text_chunks = get_text_chunks(raw_text)
-                get_vector_store(text_chunks)
-                st.success("Documents have been processed and indexed!")
-        else:
-            st.error("Please upload at least one PDF file.")
-    
+    # Retrieve and process hardcoded PDF text
+    if st.button("Process Documents"):
+        with st.spinner("Processing..."):
+            raw_text = get_document_text()
+            text_chunks = get_text_chunks(raw_text)
+            get_vector_store(text_chunks)
+            st.success("Documents have been processed and indexed!")
+
     # Ask a question
     user_question = st.text_input("Ask a Question from the uploaded PDF Files")
     
